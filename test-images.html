@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image URL Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .image-container { margin: 20px 0; }
+        .image-container img { max-width: 300px; max-height: 200px; border: 1px solid #ccc; }
+        .url { font-family: monospace; background: #f0f0f0; padding: 5px; margin: 5px 0; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Image URL Test</h1>
+    <p>This page tests if image URLs are working correctly.</p>
+    
+    <div class="image-container">
+        <h3>Default Image Test</h3>
+        <div class="url">http://10.0.2.2:5000/uploads/default.jpg</div>
+        <img src="http://10.0.2.2:5000/uploads/default.jpg" alt="Default Image" onload="this.parentNode.querySelector('.status').textContent='✅ Loaded successfully'" onerror="this.parentNode.querySelector('.status').textContent='❌ Failed to load'">
+        <div class="status"></div>
+    </div>
+    
+    <div class="image-container">
+        <h3>Sample Uploaded Image Test</h3>
+        <div class="url">http://10.0.2.2:5000/uploads/1753125527596-233099987.jpg</div>
+        <img src="http://10.0.2.2:5000/uploads/1753125527596-233099987.jpg" alt="Sample Image" onload="this.parentNode.querySelector('.status').textContent='✅ Loaded successfully'" onerror="this.parentNode.querySelector('.status').textContent='❌ Failed to load'">
+        <div class="status"></div>
+    </div>
+    
+    <div class="image-container">
+        <h3>Another Sample Image Test</h3>
+        <div class="url">http://10.0.2.2:5000/uploads/1753125513606-90626744.jpg</div>
+        <img src="http://10.0.2.2:5000/uploads/1753125513606-90626744.jpg" alt="Another Sample Image" onload="this.parentNode.querySelector('.status').textContent='✅ Loaded successfully'" onerror="this.parentNode.querySelector('.status').textContent='❌ Failed to load'">
+        <div class="status"></div>
+    </div>
+    
+    <script>
+        // Test if the server is running
+        fetch('http://10.0.2.2:5000/api/rooms')
+            .then(response => {
+                if (response.ok) {
+                    document.body.innerHTML += '<p class="success">✅ Server is running and accessible</p>';
+                } else {
+                    document.body.innerHTML += '<p class="error">❌ Server responded with status: ' + response.status + '</p>';
+                }
+            })
+            .catch(error => {
+                document.body.innerHTML += '<p class="error">❌ Cannot connect to server: ' + error.message + '</p>';
+            });
+    </script>
+</body>
+</html> 
